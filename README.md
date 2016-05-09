@@ -10,6 +10,8 @@ Tags with the `-k8s` suffix are built on [Alpine-Kubernetes][alpine_kubernetes],
 * `3.2.0`, `3.2`, `3`, `stable`, `latest` (2016-05-06, [Dockerfile][dockerfile_3_2], [Release notes][release_notes_3_2])
 * `3.2.0-k8s`, `3.2-k8s`, `3-k8s`, `stable-k8s`, `latest-k8s` ([Dockerfile][dockerfile_3_2_k8s] for Kubernetes)
 
+> NOTE: The default configuration in Redis 3.2.x binds to localhost and enables protected-mode. We don't need this since Docker networks provide complete isolation for containers. A simple workaround is to `bind 0.0.0.0` explicitly to disable this protection and revert to the previous behavior in 3.0.x. The images above set this in `/etc/redis.conf`.
+
 #### Old 3.0.x Version Tags
 
 * `3.0.7`, `3.0`, `old` (2016-01-28, [Dockerfile][dockerfile_3_0], [Release notes][release_notes_3_0])
@@ -95,7 +97,7 @@ Next we create a simple Redis server instance, and give it the name `myserver`. 
 $ docker run --rm --net=mynetwork --name=myserver sickp/alpine-redis
               _._                                                  
          _.-``__ ''-._                                             
-    _.-``    `.  `_.  ''-._           Redis 3.0.6 (00000000/0) 64 bit
+    _.-``    `.  `_.  ''-._           Redis 3.2.0 (00000000/0) 64 bit
 .-`` .-```.  ```\/    _.,_ ''-._                                   
 (    '      ,       .-`  | `,    )     Running in standalone mode
 |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
@@ -111,11 +113,11 @@ $ docker run --rm --net=mynetwork --name=myserver sickp/alpine-redis
         `-._        _.-'                                           
             `-.__.-'                                               
 
-1:M 29 Dec 22:18:04.019 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
-1:M 29 Dec 22:18:04.019 # Server started, Redis version 3.0.6
-1:M 29 Dec 22:18:04.019 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-1:M 29 Dec 22:18:04.019 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
-1:M 29 Dec 22:18:04.019 * The server is now ready to accept connections on port 6379
+1:M 09 May 18:55:40.710 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:M 09 May 18:55:40.710 # Server started, Redis version 3.2.0
+1:M 09 May 18:55:40.710 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+1:M 09 May 18:55:40.710 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+1:M 09 May 18:55:40.710 * The server is now ready to accept connections on port 6379
 ```
 
 ##### Connect
@@ -125,100 +127,9 @@ In another terminal, we now connect to our server using the Redis CLI. This ephe
 ```bash
 $ docker run --rm --net=mynetwork -it sickp/alpine-redis redis-cli -h myserver
 myserver:6379> info
-# Server
-redis_version:3.0.6
-redis_git_sha1:00000000
-redis_git_dirty:0
-redis_build_id:9e758fcb6d3a7057
-redis_mode:standalone
-os:Linux 4.1.13-boot2docker x86_64
-arch_bits:64
-multiplexing_api:epoll
-gcc_version:5.3.0
-process_id:1
-run_id:3ebd6e81255d77d3dd5fb378905ca6826a512577
-tcp_port:6379
-uptime_in_seconds:185
-uptime_in_days:0
-hz:10
-lru_clock:8585971
-config_file:/etc/redis.conf
-
-# Clients
-connected_clients:1
-client_longest_output_list:0
-client_biggest_input_buf:0
-blocked_clients:0
-
-# Memory
-used_memory:815944
-used_memory_human:796.82K
-used_memory_rss:7483392
-used_memory_peak:815944
-used_memory_peak_human:796.82K
-used_memory_lua:36864
-mem_fragmentation_ratio:9.17
-mem_allocator:jemalloc-3.6.0
-
-# Persistence
-loading:0
-rdb_changes_since_last_save:0
-rdb_bgsave_in_progress:0
-rdb_last_save_time:1451426362
-rdb_last_bgsave_status:ok
-rdb_last_bgsave_time_sec:-1
-rdb_current_bgsave_time_sec:-1
-aof_enabled:0
-aof_rewrite_in_progress:0
-aof_rewrite_scheduled:0
-aof_last_rewrite_time_sec:-1
-aof_current_rewrite_time_sec:-1
-aof_last_bgrewrite_status:ok
-aof_last_write_status:ok
-
-# Stats
-total_connections_received:2
-total_commands_processed:0
-instantaneous_ops_per_sec:0
-total_net_input_bytes:14
-total_net_output_bytes:0
-instantaneous_input_kbps:0.00
-instantaneous_output_kbps:0.00
-rejected_connections:0
-sync_full:0
-sync_partial_ok:0
-sync_partial_err:0
-expired_keys:0
-evicted_keys:0
-keyspace_hits:0
-keyspace_misses:0
-pubsub_channels:0
-pubsub_patterns:0
-latest_fork_usec:0
-migrate_cached_sockets:0
-
-# Replication
-role:master
-connected_slaves:0
-master_repl_offset:0
-repl_backlog_active:0
-repl_backlog_size:1048576
-repl_backlog_first_byte_offset:0
-repl_backlog_histlen:0
-
-# CPU
-used_cpu_sys:0.15
-used_cpu_user:0.08
-used_cpu_sys_children:0.15
-used_cpu_user_children:0.08
-
-# Cluster
-cluster_enabled:0
-
-# Keyspace
-myserver:6379>
 ```
 
+> NOTE: If the CLI fails to connect or gives you a warning about protected-mode, be sure to explicitly `bind 0.0.0.0` on the server.
 
 #### Example: Redis Master / Slave + Data Containers
 
@@ -272,6 +183,7 @@ $ docker run --rm --net=mynetwork -it sickp/alpine-redis redis-cli -h redis-slav
 
 #### History
 
+- 2016-05-09 - Explicitly bind to all interfaces by default.
 - 2016-05-06 - Added new stable Redis 3.2.0. Added more `-k8s` tags.
 - 2016-02-09 - Added support for ALPINE_NO_RESOLVER in Kubernetes version.
 - 2016-01-30 - Updated to Redis 3.0.7.

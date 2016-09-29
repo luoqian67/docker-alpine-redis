@@ -6,7 +6,7 @@ A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source
 
 #### Stable 3.2.x Version Tags
 
-- `3.2.4`, `3.2`, `3`, `stable`, `latest` (2016-09-26, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.3/Dockerfile), [Release notes][release_notes_3_2])
+- `3.2.4`, `3.2`, `3`, `stable`, `latest` (2016-09-26, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.4/Dockerfile), [Release notes][release_notes_3_2])
 - `3.2.3` (2016-08-02)
 - `3.2.2` (2016-07-28)
 - `3.2.1` (2016-06-17)

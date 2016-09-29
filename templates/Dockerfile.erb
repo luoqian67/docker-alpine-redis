@@ -8,6 +8,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 CMD ["redis-server", "/etc/redis.conf"]
 VOLUME ["/data"]
 WORKDIR /data
+COPY rootfs /
 
 RUN build_packages="build-base linux-headers openssl" \
   && apk --update add ${build_packages} \
@@ -25,5 +26,4 @@ RUN build_packages="build-base linux-headers openssl" \
   && rm -rf /tmp/* \
   && apk del ${build_packages} \
   && rm -rf /var/cache/apk/*
-
-COPY rootfs /
+  

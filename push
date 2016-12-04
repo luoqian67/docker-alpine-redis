@@ -3,6 +3,8 @@ repo="sickp/alpine-redis"
 
 redis_version = ARGV.first
 case redis_version
+when /\A4\.0\z/
+  tags = %w(4.0-rc1 4.0 4 beta)
 when /\A3\.2\.\d+\z/
   tags = %w(3.2 3 stable latest)
 when /\A3\.0\.\d+\z/

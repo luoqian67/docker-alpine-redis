@@ -4,6 +4,10 @@ A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source
 
 > If you're running Kubernetes 1.2.0 or later on all your cluster nodes, you should now use the non-`k8s` tags below. These tags are built on Alpine Linux 3.4, which adds the necessary DNS search support for service discovery. Kubernetes defaults to `dnsPolicy=ClusterFirst` in pod specs, and defines a single `nameserver` in `/etc/resolv.conf`. This means things should finally work correctly for Alpine Linux images without modification.
 
+#### Beta 4.0.x Version Tags
+
+- `4.0-rc1`, `4.0`, `4`, `beta`, (2016-12-02, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0/Dockerfile), [Release notes][release_notes_4_0])
+
 #### Stable 3.2.x Version Tags
 
 - `3.2.5`, `3.2`, `3`, `stable`, `latest` (2016-10-26, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.5/Dockerfile), [Release notes][release_notes_3_2])
@@ -174,6 +178,7 @@ $ docker run --rm --net=mynetwork -it sickp/alpine-redis redis-cli -h redis-slav
 
 #### History
 
+- 2016-12-03 - Added experimental Redis 4.0-rc1 (version 3.9.101).
 - 2016-10-28 - Updated to Redis 3.2.5 and Alpine Linux 3.4.4.
 - 2016-09-29 - Updated to Redis 3.2.4 and Alpine Linux 3.4.3.
 - 2016-08-09 - Updated to Redis 3.2.3 (and added Redis 3.2.2).
@@ -196,3 +201,4 @@ $ docker run --rm --net=mynetwork -it sickp/alpine-redis redis-cli -h redis-slav
 [redis]:              http://redis.io/
 [release_notes_3_0]:  https://raw.githubusercontent.com/antirez/redis/3.0/00-RELEASENOTES
 [release_notes_3_2]:  https://raw.githubusercontent.com/antirez/redis/3.2/00-RELEASENOTES
+[release_notes_4_0]:  https://raw.githubusercontent.com/antirez/redis/4.0/00-RELEASENOTES

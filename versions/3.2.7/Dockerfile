@@ -1,4 +1,4 @@
-# Redis <%= redis_version %>
+# Redis 3.2.7
 
 FROM alpine:3.5
 MAINTAINER Adrian B. Danieli "https://github.com/sickp"
@@ -12,12 +12,12 @@ COPY rootfs /
 
 RUN build_packages="build-base linux-headers openssl" \
   && apk --update add ${build_packages} \
-  && wget -O /usr/local/bin/gosu https://github.com/tianon/gosu/releases/download/<%= gosu_version %>/gosu-amd64 \
+  && wget -O /usr/local/bin/gosu https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 \
   && chmod +x /usr/local/bin/gosu \
   && cd /tmp \
-  && wget <%= redis_url %> \
-  && tar xzf <%= redis_archive %> \
-  && cd /tmp/redis-<%= redis_version %> \
+  && wget http://download.redis.io/releases/redis-3.2.7.tar.gz \
+  && tar xzf redis-3.2.7.tar.gz \
+  && cd /tmp/redis-3.2.7 \
   && make \
   && make install \
   && cp redis.conf /etc/redis.conf \

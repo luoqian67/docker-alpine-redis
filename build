@@ -6,21 +6,21 @@ repo="sickp/alpine-redis"
 
 redis_version = ARGV.first
 case redis_version
-when /\A4\.0\z/
-  tags = %w(4.0-rc1 4.0 4 beta)
+when /\A4\.0-rc\d\z/
+  tags = %w(4.0 4 beta)
   redis_archive = "#{redis_version}.tar.gz"
   redis_url = "https://github.com/antirez/redis/archive/#{redis_archive}"
 when /\A3\.2\.\d+\z/
   tags = %w(3.2 3 stable latest)
   redis_archive = "redis-#{redis_version}.tar.gz"
-  redis_url = "http://download.redis.io/releases/redis-#{redis_archive}"
+  redis_url = "http://download.redis.io/releases/#{redis_archive}"
 when /\A3\.0\.\d+\z/
   tags = %w(3.0 old)
   redis_archive = "redis-#{redis_version}.tar.gz"
-  redis_url = "http://download.redis.io/releases/redis-#{redis_archive}"
+  redis_url = "http://download.redis.io/releases/#{redis_archive}"
 else
   puts "Usage: build <redis_version>"
-  puts "  <redis_version> = 4.0.x | 3.2.x | 3.0.x"
+  puts "  <redis_version> = 4.0-rc{x} | 3.2.x | 3.0.x"
   exit 1
 end
 

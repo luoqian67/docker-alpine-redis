@@ -1,6 +1,6 @@
-# Redis 4.0
+# Redis 3.2.6
 
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER Adrian B. Danieli "https://github.com/sickp"
 
 EXPOSE 6379
@@ -15,9 +15,9 @@ RUN build_packages="build-base linux-headers openssl" \
   && wget -O /usr/local/bin/gosu https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 \
   && chmod +x /usr/local/bin/gosu \
   && cd /tmp \
-  && wget https://github.com/antirez/redis/archive/4.0.tar.gz \
-  && tar xzf 4.0.tar.gz \
-  && cd /tmp/redis-4.0 \
+  && wget http://download.redis.io/releases/redis-3.2.6.tar.gz \
+  && tar xzf redis-3.2.6.tar.gz \
+  && cd /tmp/redis-3.2.6 \
   && make \
   && make install \
   && cp redis.conf /etc/redis.conf \

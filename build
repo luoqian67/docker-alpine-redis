@@ -35,7 +35,7 @@ FileUtils.mkdir(version_dir)
 FileUtils.cp_r(File.join(template_dir, "rootfs"), version_dir)
 File.write(File.join(version_dir, "Dockerfile"), template.result(binding))
 
-system("docker build -t #{repo}:#{redis_version} --pull #{version_dir}") || abort
+system("docker build -t #{repo}:#{redis_version} --pull #{version_dir} --squash") || abort
 puts "Built #{repo}:#{redis_version}"
 
 tags.each do |tag|

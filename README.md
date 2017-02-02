@@ -2,7 +2,7 @@
 
 A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source atop [Alpine Linux][alpine_linux]. Available on [GitHub][github_project].
 
-> If you're running Kubernetes 1.2.0 or later on all your cluster nodes, you should now use the non-`k8s` tags below. These tags are built on Alpine Linux 3.4, which adds the necessary DNS search support for service discovery. Kubernetes defaults to `dnsPolicy=ClusterFirst` in pod specs, and defines a single `nameserver` in `/etc/resolv.conf`. This means things should finally work correctly for Alpine Linux images without modification.
+> Redis 3.2.6+ are built on Alpine Linux 3.5.0 (gcc 6.2.1).
 
 #### Beta 4.0.x Version Tags
 
@@ -30,7 +30,7 @@ A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source
 
 #### Kubernetes < 1.2.0
 
-Tags with the `-k8s` suffix are built on [Alpine-Kubernetes 3.3][alpine_kubernetes], an image for Kubernetes and other Docker cluster environments that use DNS-based service discovery. It adds the necessary `search` domain support for DNS resolution.
+Tags with the `-k8s` suffix are built on [Alpine-Kubernetes 3.3][alpine_kubernetes], an image for Kubernetes and other Docker cluster environments that use DNS-based service discovery. It adds the necessary `search` domain support for DNS resolution. If you're running Kubernetes 1.2.0 or later on all your cluster nodes, you should now use the non-`k8s` tags. Modern Kubernetes defaults to `dnsPolicy=ClusterFirst` in pod specs, and defines a single `nameserver` in `/etc/resolv.conf`. This means things should finally work correctly for Alpine Linux images without modification.
 
 - `3.2.0-k8s`, `3.2-k8s`, `3-k8s`, `stable-k8s`, `latest-k8s`
 - `3.0.7-k8s`, `3.0-k8s`, `old-k8s`

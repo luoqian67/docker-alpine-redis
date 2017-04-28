@@ -2,14 +2,29 @@
 
 A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source atop [Alpine Linux][alpine_linux]. Available on [GitHub][github_project].
 
-#### Beta 4.0.x Version Tags
+### Beta 4.x Tags
 
-- `4.0-rc2`, `4.0`, `4`, `beta`, (2016-12-06, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0-rc2/Dockerfile), [Release notes][release_notes_4_0])
+##### `4.0-rc3`, `4.0`, `4`, `beta`
+
+[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0-rc3/Dockerfile) / [Release notes][release_notes_4_0] / 2017-04-22
+
+    $ docker run --rm sickp/alpine-redis:4.0-rc3 about
+    * Redis server v=3.9.103 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=63499dc16153446
+    * Alpine Linux 3.5.2
+
+- `4.0-rc2` (2016-12-06)
 - `4.0-rc1` (2016-12-02)
 
-#### Stable 3.2.x Version Tags
+### Stable 3.2.x Tags
 
-- `3.2.8`, `3.2`, `3`, `stable`, `latest` (2017-02-12, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.8/Dockerfile), [Release notes][release_notes_3_2])
+##### `3.2.8`, `3.2`, `3`, `stable`, `latest`
+
+[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.8/Dockerfile) / [Release notes][release_notes_3_2] / 2017-02-12
+
+    $ docker run --rm sickp/alpine-redis:3.2.8 about
+    * Redis server v=3.2.8 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=6b5d4b5755d2957e
+    * Alpine Linux 3.5.2
+
 - `3.2.7` (2017-01-31)
 - `3.2.6` (2016-12-06)
 - `3.2.5` (2016-10-26)
@@ -21,19 +36,11 @@ A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source
 
 > NOTE: The default configuration in Redis 3.2.x binds to localhost and enables protected-mode. We don't want/need this since Docker networks provide isolation for containers. A simple workaround is to `bind 0.0.0.0` explicitly to disable this protection and revert to the previous behavior in 3.0.x. The images above set this in `/etc/redis.conf`.
 
-#### Old 3.0.x Version Tags
+### Older Tags
 
-- `3.0.7`, `3.0`, `old` (2016-01-28, [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.0.7/Dockerfile), [Release notes][release_notes_3_0])
+- `3.0.7` (2016-01-28)
 - `3.0.6` (2015-12-18)
 - `3.0.5` (2015-10-15)
-
-#### Kubernetes < 1.2.0
-
-Tags with the `-k8s` suffix are built on [Alpine-Kubernetes 3.3][alpine_kubernetes], an image for Kubernetes and other Docker cluster environments that use DNS-based service discovery. It adds the necessary `search` domain support for DNS resolution. If you're running Kubernetes 1.2.0 or later on all your cluster nodes, you should now use the non-`k8s` tags. Modern Kubernetes defaults to `dnsPolicy=ClusterFirst` in pod specs, and defines a single `nameserver` in `/etc/resolv.conf`. This means things should finally work correctly for Alpine Linux images without modification.
-
-- `3.2.0-k8s`, `3.2-k8s`, `3-k8s`, `stable-k8s`, `latest-k8s`
-- `3.0.7-k8s`, `3.0-k8s`, `old-k8s`
-- `3.0.6-k8s`
 
 ### Basic Usage
 
@@ -150,25 +157,26 @@ Connect to the slave instance.
 
     $ docker run --rm --net=mynetwork -it sickp/alpine-redis redis-cli -h redis-slave
 
-#### History
+### History
 
-- 2017-03-04 - Updated to Redis 3.2.8.
-- 2017-01-31 - Updated to Redis 4.0-rc2, Redis 3.2.7 (and added Redis 3.2.6), Alpine Linux 3.5.0.
-- 2016-12-03 - Added experimental Redis 4.0-rc1 (version 3.9.101).
-- 2016-10-28 - Updated to Redis 3.2.5 and Alpine Linux 3.4.4.
-- 2016-09-29 - Updated to Redis 3.2.4 and Alpine Linux 3.4.3.
-- 2016-08-09 - Updated to Redis 3.2.3 (and added Redis 3.2.2).
-- 2016-06-30 - Updated to Redis 3.2.1.
-- 2016-06-16 - Updated Redis 3.2.0 to Alpine Linux 3.4.0 (with `search` support for Kubernetes >=1.2.0).
-- 2016-05-09 - Explicitly bind to all interfaces by default.
-- 2016-05-06 - Added new stable Redis 3.2.0. Added more `-k8s` tags.
-- 2016-02-09 - Added support for ALPINE_NO_RESOLVER in Kubernetes version.
-- 2016-01-30 - Updated to Redis 3.0.7.
-- 2016-01-27 - Added Kubernetes versions (-k8s), until Alpine Linux/musl adds DNS search support.
-- 2015-12-29 - Official Docker Redis compatibility, and improved documentation.
-- 2015-12-25 - Updated to Alpine Linux 3.3 (gcc 5.3.0), enable option passthrough to `redis-server`.
-- 2015-12-18 - Updated to Redis 3.0.6.
-- 2015-12-11 - Initial version.
+    2017-04-27 Updated to Redis 4.0-rc3, Alpine Linux 3.5.2.
+    2017-03-04 Updated to Redis 3.2.8.
+    2017-01-31 Updated to Redis 4.0-rc2, Redis 3.2.7 (and added Redis 3.2.6), Alpine Linux 3.5.0.
+    2016-12-03 Added experimental Redis 4.0-rc1 (version 3.9.101).
+    2016-10-28 Updated to Redis 3.2.5 and Alpine Linux 3.4.4.
+    2016-09-29 Updated to Redis 3.2.4 and Alpine Linux 3.4.3.
+    2016-08-09 Updated to Redis 3.2.3 (and added Redis 3.2.2).
+    2016-06-30 Updated to Redis 3.2.1.
+    2016-06-16 Updated Redis 3.2.0 to Alpine Linux 3.4.0 (with `search` support for Kubernetes >=1.2.0).
+    2016-05-09 Explicitly bind to all interfaces by default.
+    2016-05-06 Added new stable Redis 3.2.0. Added more `-k8s` tags.
+    2016-02-09 Added support for ALPINE_NO_RESOLVER in Kubernetes version.
+    2016-01-30 Updated to Redis 3.0.7.
+    2016-01-27 Added Kubernetes versions (-k8s), until Alpine Linux/musl adds DNS search support.
+    2015-12-29 Official Docker Redis compatibility, and improved documentation.
+    2015-12-25 Updated to Alpine Linux 3.3 (gcc 5.3.0), enable option passthrough to `redis-server`.
+    2015-12-18 Updated to Redis 3.0.6.
+    2015-12-11 Initial version.
 
 [alpine_kubernetes]:  https://hub.docker.com/r/janeczku/alpine-kubernetes/
 [alpine_linux]:       https://hub.docker.com/_/alpine/

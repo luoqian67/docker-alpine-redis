@@ -1,8 +1,16 @@
 ### Alpine Linux Redis
 
-A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source atop [Alpine Linux][alpine_linux]. Available on [GitHub][github_project].
+A lightweight [Redis][redis] [Docker image][docker_project] built from source atop [Alpine Linux][alpine_linux]. Available on [GitHub][github_project].
 
-### Beta 4.x Tags
+### Stable 4.0.x Tags
+
+##### `4.0.0`, `4.0`, `4`, `stable`, `latest`
+
+[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0.0/Dockerfile) / [Release notes][release_notes_4_0] / 2017-07-14
+
+    $ docker run --rm sickp/alpine-redis:4.0.0 about
+    * Redis server v=4.0.0 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=8b94d0e38179b276
+    * Alpine Linux 3.6.2
 
 ##### `4.0-rc3`, `4.0`, `4`, `beta`
 
@@ -15,9 +23,11 @@ A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source
 - `4.0-rc2` (2016-12-06)
 - `4.0-rc1` (2016-12-02)
 
-### Stable 3.2.x Tags
+> NOTE: The default configuration in Redis 4.0.x binds to localhost and enables protected-mode. We don't want/need this since Docker networks provide isolation for containers. A simple workaround is to `bind 0.0.0.0` explicitly to disable this protection and revert to the previous behavior in 3.0.x. The images above set this in `/etc/redis.conf`.
 
-##### `3.2.9`, `3.2`, `3`, `stable`, `latest`
+### Older 3.x.y Tags
+
+##### `3.2.9`, `3.2`, `3`
 
 [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.9/Dockerfile) / [Release notes][release_notes_3_2] / 2017-05-17
 
@@ -41,11 +51,6 @@ A lightweight [Redis][redis] [Docker image][dockerhub_project] built from source
 - `3.2.2` (2016-07-28)
 - `3.2.1` (2016-06-17)
 - `3.2.0` (2016-05-06)
-
-> NOTE: The default configuration in Redis 3.2.x binds to localhost and enables protected-mode. We don't want/need this since Docker networks provide isolation for containers. A simple workaround is to `bind 0.0.0.0` explicitly to disable this protection and revert to the previous behavior in 3.0.x. The images above set this in `/etc/redis.conf`.
-
-### Older Tags
-
 - `3.0.7` (2016-01-28)
 - `3.0.6` (2015-12-18)
 - `3.0.5` (2015-10-15)
@@ -58,10 +63,10 @@ After the image name, just specify the executable to run followed by any options
 
 > _NOTE 2_: Do NOT override `ENTRYPOINT`. This image's entrypoint script fixes permissions on the data volume and becomes the `redis` user if you're running `redis-server`. Otherwise, it simply executes your command as is.
 
-    $ docker run --rm sickp/alpine-redis:3.2.9 # redis-server /etc/redis.conf
+    $ docker run --rm sickp/alpine-redis:4.0.0 # redis-server /etc/redis.conf
                    _._                                                  
               _.-``__ ''-._                                             
-         _.-``    `.  `_.  ''-._           Redis 3.2.9 (00000000/0) 64 bit
+         _.-``    `.  `_.  ''-._           Redis 4.0.0 (00000000/0) 64 bit
      .-`` .-```.  ```\/    _.,_ ''-._                                   
     (    '      ,       .-`  | `,    )     Running in standalone mode
     |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
@@ -77,23 +82,19 @@ After the image name, just specify the executable to run followed by any options
             `-._        _.-'                                           
                 `-.__.-'                                               
 
-    1:M 31 May 17:20:31.953 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
-    1:M 31 May 17:20:31.953 # Server started, Redis version 3.2.9
-    1:M 31 May 17:20:31.959 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
-    1:M 31 May 17:20:31.959 * The server is now ready to accept connections on port 6379
+    1:M 14 Jul 21:20:51.499 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+    1:M 14 Jul 21:20:51.499 # Server initialized
+    1:M 14 Jul 21:20:51.503 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+    1:M 14 Jul 21:20:51.504 * Ready to accept connections
 
 Explore the image in a container shell:
 
-    $ docker run --rm -it sickp/alpine-redis:3.2.9 ash
+    $ docker run --rm -it sickp/alpine-redis:4.0.0 ash
     /data #
 
-Check the server version:
-
-    $ docker run --rm sickp/alpine-redis:3.2.9 about
-    * Redis server v=3.2.9 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=b316005caa23dbe8
-    * Alpine Linux 3.6.0
-
 #### Example: Redis Server + CLI
+
+> NOTE: these examples are getting a bit old. Nowadays, you would probably use Docker Compose.
 
 This example starts a default Redis server in its own network. It requires Docker 1.9+ as it uses Docker's modern networking support. We then connect to it using the Redis command line interface.
 
@@ -167,6 +168,7 @@ Connect to the slave instance.
 
 ### History
 
+    2017-07-14 Updated to Redis 4.0.0, Alpine Linux 3.6.2.
     2017-05-31 Updated to Redis 3.2.9, Alpine Linux 3.6.0.
     2017-04-27 Updated to Redis 4.0-rc3, Alpine Linux 3.5.2.
     2017-03-04 Updated to Redis 3.2.8.
@@ -189,7 +191,7 @@ Connect to the slave instance.
 
 [alpine_kubernetes]:  https://hub.docker.com/r/janeczku/alpine-kubernetes/
 [alpine_linux]:       https://hub.docker.com/_/alpine/
-[dockerhub_project]:  https://hub.docker.com/r/sickp/alpine-redis/
+[docker_project]:     https://store.docker.com/community/images/sickp/alpine-redis
 [github_project]:     https://github.com/sickp/docker-alpine-redis/
 [redis]:              http://redis.io/
 [release_notes_3_0]:  https://raw.githubusercontent.com/antirez/redis/3.0/00-RELEASENOTES

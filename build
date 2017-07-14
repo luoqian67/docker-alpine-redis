@@ -3,7 +3,7 @@ repo='sickp/alpine-redis'
 
 def error(message)
   puts message
-  puts "Usage: #{__FILE__} {major}.{minor}.{patch} | 4.0-rc{n}"
+  puts "Usage: #{__FILE__} {major}.{minor}.{patch}"
   exit 1
 end
 
@@ -13,7 +13,7 @@ def execute(cmd)
 end
 
 version = ARGV.first
-error("Bad version format: #{version}") unless version&.match?(/\A\d+\.\d+\.\d+|4\.0-rc\d+\z/)
+error("Bad version format: #{version}") unless version&.match?(/\A\d+\.\d+\.\d+|4\.0\.\d+\z/)
 
 dockerfile = File.join(File.dirname(__FILE__), 'versions', version, 'Dockerfile')
 error("Missing Dockerfile #{dockerfile}") unless File.file?(dockerfile)

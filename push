@@ -3,7 +3,7 @@ repo="sickp/alpine-redis"
 
 def error(message)
   puts message
-  puts "Usage: #{__FILE__} {major}.{minor}.{patch} | 4.0-rc{n} [tag]... ]"
+  puts "Usage: #{__FILE__} {major}.{minor}.{patch} [tag]... ]"
   exit 1
 end
 
@@ -14,10 +14,10 @@ end
 
 version, *tags = ARGV
 case version
-when /\A4\.0-rc\d\z/
-  possible_tags = %w(4.0 4 beta)
+when /\A4\.0\.\d+\z/
+  possible_tags = %w(4.0 4 stable latest)
 when /\A3\.2\.\d+\z/
-  possible_tags = %w(3.2 3 stable latest)
+  possible_tags = %w(3.2 3)
 when /\A3\.0\.\d+\z/
   possible_tags = %w(3.0 old)
 else

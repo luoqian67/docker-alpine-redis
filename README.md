@@ -12,14 +12,7 @@ A lightweight [Redis][redis] [Docker image][docker_project] built from source at
     * Redis server v=4.0.0 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=8b94d0e38179b276
     * Alpine Linux 3.6.2
 
-##### `4.0-rc3`, `4.0`, `4`, `beta`
-
-[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0-rc3/Dockerfile) / [Release notes][release_notes_4_0] / 2017-04-22
-
-    $ docker run --rm sickp/alpine-redis:4.0-rc3 about
-    * Redis server v=3.9.103 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=63499dc16153446
-    * Alpine Linux 3.5.2
-
+- `4.0-rc3` (2017-04-22)
 - `4.0-rc2` (2016-12-06)
 - `4.0-rc1` (2016-12-02)
 
@@ -35,14 +28,7 @@ A lightweight [Redis][redis] [Docker image][docker_project] built from source at
     * Redis server v=3.2.9 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=b316005caa23dbe8
     * Alpine Linux 3.6.0
 
-##### `3.2.8`
-
-[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/3.2.8/Dockerfile) / [Release notes][release_notes_3_2] / 2017-02-12
-
-    $ docker run --rm sickp/alpine-redis:3.2.8 about
-    * Redis server v=3.2.8 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=6b5d4b5755d2957e
-    * Alpine Linux 3.5.2
-
+- `3.2.8` (2017-02-12)
 - `3.2.7` (2017-01-31)
 - `3.2.6` (2016-12-06)
 - `3.2.5` (2016-10-26)

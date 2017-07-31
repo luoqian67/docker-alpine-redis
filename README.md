@@ -4,7 +4,15 @@ A lightweight [Redis][redis] [Docker image][docker_project] built from source at
 
 ### Stable 4.0.x Tags
 
-##### `4.0.0`, `4.0`, `4`, `stable`, `latest`
+##### `4.0.1`, `4.0`, `4`, `stable`, `latest`
+
+[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0.1/Dockerfile) / [Release notes][release_notes_4_0] / 2017-07-24
+
+    $ docker run --rm sickp/alpine-redis:4.0.1 about
+    * Redis server v=4.0.1 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=52b93b307a4bf297
+    * Alpine Linux 3.6.2
+
+##### `4.0.0`
 
 [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0.0/Dockerfile) / [Release notes][release_notes_4_0] / 2017-07-14
 
@@ -154,6 +162,7 @@ Connect to the slave instance.
 
 ### History
 
+    2017-07-31 Updated to Redis 4.0.1.
     2017-07-14 Updated to Redis 4.0.0, Alpine Linux 3.6.2.
     2017-05-31 Updated to Redis 3.2.9, Alpine Linux 3.6.0.
     2017-04-27 Updated to Redis 4.0-rc3, Alpine Linux 3.5.2.

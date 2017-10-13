@@ -4,7 +4,15 @@ A lightweight [Redis][redis] [Docker image][docker_project] built from source at
 
 ### Stable 4.0.x Tags
 
-##### `4.0.1`, `4.0`, `4`, `stable`, `latest`
+##### `4.0.2`, `4.0`, `4`, `stable`, `latest`
+
+[Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0.2/Dockerfile) / [Release notes][release_notes_4_0] / 2017-09-21
+
+    $ docker run --rm sickp/alpine-redis:4.0.2 about
+    * Redis server v=4.0.2 sha=00000000:0 malloc=jemalloc-4.0.3 bits=64 build=c918a68063d3bcca
+    * Alpine Linux 3.6.2
+
+##### `4.0.1`
 
 [Dockerfile](https://github.com/sickp/docker-alpine-redis/tree/master/versions/4.0.1/Dockerfile) / [Release notes][release_notes_4_0] / 2017-07-24
 
@@ -57,10 +65,10 @@ After the image name, just specify the executable to run followed by any options
 
 > _NOTE 2_: Do NOT override `ENTRYPOINT`. This image's entrypoint script fixes permissions on the data volume and becomes the `redis` user if you're running `redis-server`. Otherwise, it simply executes your command as is.
 
-    $ docker run --rm sickp/alpine-redis:4.0.0 # redis-server /etc/redis.conf
+    $ docker run --rm sickp/alpine-redis:4.0.2 # redis-server /etc/redis.conf
                    _._                                                  
               _.-``__ ''-._                                             
-         _.-``    `.  `_.  ''-._           Redis 4.0.0 (00000000/0) 64 bit
+         _.-``    `.  `_.  ''-._           Redis 4.0.2 (00000000/0) 64 bit
      .-`` .-```.  ```\/    _.,_ ''-._                                   
     (    '      ,       .-`  | `,    )     Running in standalone mode
     |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
@@ -83,7 +91,7 @@ After the image name, just specify the executable to run followed by any options
 
 Explore the image in a container shell:
 
-    $ docker run --rm -it sickp/alpine-redis:4.0.0 ash
+    $ docker run --rm -it sickp/alpine-redis:4.0.2 ash
     /data #
 
 #### Example: Redis Server + CLI
@@ -162,6 +170,7 @@ Connect to the slave instance.
 
 ### History
 
+    2017-10-13 Updated to Redis 4.0.2.
     2017-07-31 Updated to Redis 4.0.1.
     2017-07-14 Updated to Redis 4.0.0, Alpine Linux 3.6.2.
     2017-05-31 Updated to Redis 3.2.9, Alpine Linux 3.6.0.

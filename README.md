@@ -1,3 +1,6 @@
+ARCHIVED 2019-05-18: see the official Docker Redis images here: https://hub.docker.com/_/redis
+---
+
 ### Alpine Linux Redis
 
 A lightweight [Redis][redis] [Docker image][docker_project] built from source atop [Alpine Linux][alpine_linux]. Available on [GitHub][github_project].
